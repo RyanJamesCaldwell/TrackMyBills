@@ -6,3 +6,5 @@ To do:
 - Modify past bills
 - General error checking
 - Separate UI code from application code
+
+![Alt text](/src/images/LoginPage.JPG?raw=true "Account Login Page")

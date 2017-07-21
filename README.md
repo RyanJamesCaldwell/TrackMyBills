@@ -7,4 +7,4 @@ To do:
 - General error checking
 - Separate UI code from application code
 
-!(TrackMyBills/src/images/LoginPage.JPG?raw=true "Account Login Page")
+![Login Page](TrackMyBills/src/images/LoginPage.JPG?raw=true "Account Login Page")

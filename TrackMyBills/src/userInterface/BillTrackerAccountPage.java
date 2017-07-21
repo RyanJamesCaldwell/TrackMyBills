@@ -82,7 +82,7 @@ public class BillTrackerAccountPage {
 	private void initialize() {
 		frmTrackmybills = new JFrame();
 		frmTrackmybills.setTitle("TrackMyBills - Login");
-		frmTrackmybills.setBounds(100, 100, 450, 316);
+		frmTrackmybills.setBounds(100, 100, 450, 340);
 		frmTrackmybills.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTrackmybills.getContentPane().setLayout(null);
 		
@@ -115,6 +115,16 @@ public class BillTrackerAccountPage {
 		btnCreateAccount = new JButton("Create Account");
 		btnCreateAccount.setBounds(162, 205, 122, 23);
 		frmTrackmybills.getContentPane().add(btnCreateAccount);
+		
+		JButton btnRemoveAccount = new JButton("Remove Account");
+		btnRemoveAccount.setBounds(153, 247, 137, 23);
+		frmTrackmybills.getContentPane().add(btnRemoveAccount);
+		btnRemoveAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				removeAccount();
+			}
+		});	
+		
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				createNewAccount();
@@ -170,6 +180,21 @@ public class BillTrackerAccountPage {
 		    }
 		});
 		createAccountWindow.showDialog();
+	}
+	
+	/**
+	 * Removes an existing user account from the APPDATA folder
+	 */
+	public void removeAccount() {
+		String accountToRemove = this.cboxAccountName.getSelectedItem().toString();
+		int indexToRemoveFromCbox = this.cboxAccountName.getSelectedIndex();
+		
+		File fileToRemove = new File(System.getenv("APPDATA") + "/TrackMyBills/" + accountToRemove);
+		fileToRemove.delete();
+		this.cboxAccountName.removeItemAt(indexToRemoveFromCbox);
+		if(this.cboxAccountName.getItemCount() == 0){
+			this.btnlogin.setEnabled(false);
+		}
 	}
 	
 	// Loads existing user accounts into the JDialogBox

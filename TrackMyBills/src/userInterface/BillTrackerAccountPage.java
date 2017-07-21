@@ -56,6 +56,8 @@ public class BillTrackerAccountPage {
 	private CreateAccountWindow createAccountWindow;
 	// TrackMyBills folder in AppData
 	private File trackMyBillsFolder;
+	// JButton for removing account
+	private JButton btnRemoveAccount;
 	
 	/**
 	 * Create TrackMyBills folder in %APPDATA%, load accounts and AccountSummaryWindow
@@ -116,7 +118,7 @@ public class BillTrackerAccountPage {
 		btnCreateAccount.setBounds(162, 205, 122, 23);
 		frmTrackmybills.getContentPane().add(btnCreateAccount);
 		
-		JButton btnRemoveAccount = new JButton("Remove Account");
+		btnRemoveAccount = new JButton("Remove Account");
 		btnRemoveAccount.setBounds(153, 247, 137, 23);
 		frmTrackmybills.getContentPane().add(btnRemoveAccount);
 		btnRemoveAccount.addActionListener(new ActionListener() {
@@ -159,6 +161,7 @@ public class BillTrackerAccountPage {
 				frmTrackmybills.setVisible(true);
 				btnlogin.setEnabled(true);
 				btnCreateAccount.setEnabled(true);
+				btnRemoveAccount.setEnabled(true);
 			}
 		});
 	}
@@ -207,6 +210,7 @@ public class BillTrackerAccountPage {
 		
 		if(listOfFiles.length == 0) {
 			this.btnlogin.setEnabled(false);
+			this.btnRemoveAccount.setEnabled(false);
 		}
 		else {
 			//Add user accounts to doubly linked list and JComboBox

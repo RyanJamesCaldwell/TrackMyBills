@@ -179,6 +179,7 @@ public class BillTrackerAccountPage {
 		        loadAccounts();
 		        if(cboxAccountName.getItemCount() > 0) {
 		        	btnlogin.setEnabled(true);
+		        	btnRemoveAccount.setEnabled(true);
 		        }
 		    }
 		});

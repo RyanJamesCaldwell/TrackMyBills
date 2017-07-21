@@ -8,3 +8,4 @@ To do:
 - Separate UI code from application code
 
 ![Login Page](TrackMyBills/src/images/LoginPage.JPG?raw=true "Account Login Page")
+![Generated chart for electric bill](TrackMyBills/src/images/ElectricBillChart.JPG?raw=true "Example Electric Bill Chart")

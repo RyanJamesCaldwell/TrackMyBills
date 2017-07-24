@@ -91,7 +91,7 @@ public class AccountSummaryWindow extends JDialog {
 	
 	// Initializes the user interface, adds basic functionality to UI components
 	private void initialize() {
-		JLabel lblModifyBills = new JLabel("Add Bills");
+		JLabel lblModifyBills = new JLabel("Manage Bills");
 		lblModifyBills.setFont(new Font("Arial", Font.BOLD, 11));
 		lblModifyBills.setBounds(10, 11, 76, 14);
 		getContentPane().add(lblModifyBills);
@@ -105,7 +105,6 @@ public class AccountSummaryWindow extends JDialog {
 		btnRefreshBills.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dbFactory = DocumentBuilderFactory.newInstance();
-				//accountFile = new File("src/resources/" + accountName);
 				
 				accountFile = new File(System.getenv("APPDATA") + "/TrackMyBills/" + accountName);
 				try {
@@ -127,7 +126,7 @@ public class AccountSummaryWindow extends JDialog {
 		getContentPane().add(btnRefreshBills);
 		
 		JButton btnAddNewBill = new JButton("Add Bill");
-		btnAddNewBill.setBounds(10, 36, 87, 23);
+		btnAddNewBill.setBounds(10, 36, 100, 23);
 		getContentPane().add(btnAddNewBill);
 		btnAddNewBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,7 +135,7 @@ public class AccountSummaryWindow extends JDialog {
 		});
 		
 		JButton btnViewElectricBill = new JButton("Electric");
-		btnViewElectricBill.setBounds(10, 108, 87, 23);
+		btnViewElectricBill.setBounds(10, 108, 100, 23);
 		getContentPane().add(btnViewElectricBill);
 		btnViewElectricBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +144,7 @@ public class AccountSummaryWindow extends JDialog {
 		});
 		
 		JButton btnViewGasBill = new JButton("Gas");
-		btnViewGasBill.setBounds(119, 108, 89, 23);
+		btnViewGasBill.setBounds(120, 108, 100, 23);
 		getContentPane().add(btnViewGasBill);
 		btnViewGasBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -154,7 +153,7 @@ public class AccountSummaryWindow extends JDialog {
 		});
 		
 		JButton btnViewWaterBill = new JButton("Water");
-		btnViewWaterBill.setBounds(233, 108, 89, 23);
+		btnViewWaterBill.setBounds(230, 108, 100, 23);
 		getContentPane().add(btnViewWaterBill);
 		btnViewWaterBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -174,6 +173,18 @@ public class AccountSummaryWindow extends JDialog {
 		lblRefreshBillList.setFont(new Font("Arial", Font.BOLD, 11));
 		lblRefreshBillList.setBounds(10, 151, 100, 14);
 		getContentPane().add(lblRefreshBillList);
+		
+		JButton btnRemoveBill = new JButton("Remove Bill");
+		btnRemoveBill.setBounds(120, 36, 100, 23);
+		getContentPane().add(btnRemoveBill);
+		
+		JButton btnModifyBill = new JButton("Modify Bill");
+		btnModifyBill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnModifyBill.setBounds(230, 36, 100, 23);
+		getContentPane().add(btnModifyBill);
 	}
 	
 	/**

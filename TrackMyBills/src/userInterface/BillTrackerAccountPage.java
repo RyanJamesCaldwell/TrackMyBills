@@ -76,13 +76,13 @@ public class BillTrackerAccountPage {
 		this.trackMyBillsFolder = new File(System.getenv("APPDATA") + "/TrackMyBills");
 		File appData = new File(System.getenv("APPDATA"));
 		
-		if(appData.exists()){
+		if(appData.exists()) {
 			// If the TrackMyBills folder doesn't exist in APPDATA, create the folder
 			if(!this.trackMyBillsFolder.exists()) {
 				this.trackMyBillsFolder.mkdir();
 			}
 		}
-		else{
+		else {
 			System.err.println("Fatal error: AppData folder does not exist.");
 			this.frmTrackmybills.dispose();
 		}

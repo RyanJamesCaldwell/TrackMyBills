@@ -173,18 +173,6 @@ public class AccountSummaryWindow extends JDialog {
 		lblRefreshBillList.setFont(new Font("Arial", Font.BOLD, 11));
 		lblRefreshBillList.setBounds(10, 151, 100, 14);
 		getContentPane().add(lblRefreshBillList);
-		
-		JButton btnRemoveBill = new JButton("Remove Bill");
-		btnRemoveBill.setBounds(120, 36, 100, 23);
-		getContentPane().add(btnRemoveBill);
-		
-		JButton btnModifyBill = new JButton("Modify Bill");
-		btnModifyBill.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnModifyBill.setBounds(230, 36, 100, 23);
-		getContentPane().add(btnModifyBill);
 	}
 	
 	/**

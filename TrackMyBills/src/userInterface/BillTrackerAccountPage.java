@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import linkedList.DoublyLinkedList;
 import linkedList.Node;
@@ -130,7 +131,10 @@ public class BillTrackerAccountPage {
 		frmTrackmybills.getContentPane().add(btnRemoveAccount);
 		btnRemoveAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				removeAccount();
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this account? This action cannot be undone.", "Remove account?",  JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					removeAccount();
+				}
 			}
 		});	
 		
@@ -205,6 +209,7 @@ public class BillTrackerAccountPage {
 		this.cboxAccountName.removeItemAt(indexToRemoveFromCbox);
 		if(this.cboxAccountName.getItemCount() == 0){
 			this.btnlogin.setEnabled(false);
+			this.btnRemoveAccount.setEnabled(false);
 		}
 	}
 	

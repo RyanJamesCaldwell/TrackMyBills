@@ -101,6 +101,31 @@ public class AccountSummaryWindow extends JDialog {
 		lblViewBillHistory.setBounds(10, 83, 100, 14);
 		getContentPane().add(lblViewBillHistory);
 		
+		JButton btnRefreshBills = new JButton("Refresh Bills");
+		btnRefreshBills.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dbFactory = DocumentBuilderFactory.newInstance();
+				//accountFile = new File("src/resources/" + accountName);
+				
+				accountFile = new File(System.getenv("APPDATA") + "/TrackMyBills/" + accountName);
+				try {
+					documentBuilder = dbFactory.newDocumentBuilder();
+				} catch (ParserConfigurationException e) {
+					System.err.println("Error building new document builder.");
+				}
+				try {
+					xmlDocument = documentBuilder.parse(accountFile);
+				} catch (Exception e) {
+					System.err.println("Error parsing XML document.");
+				}
+				
+				docParser = new DocumentParser(xmlDocument);
+				getUtilityBills();
+			}
+		});
+		btnRefreshBills.setBounds(10, 172, 107, 23);
+		getContentPane().add(btnRefreshBills);
+		
 		JButton btnAddNewBill = new JButton("Add Bill");
 		btnAddNewBill.setBounds(10, 36, 87, 23);
 		getContentPane().add(btnAddNewBill);
@@ -140,31 +165,6 @@ public class AccountSummaryWindow extends JDialog {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 70, 473, 2);
 		getContentPane().add(separator);
-		
-		JButton btnRefreshBills = new JButton("Refresh Bills");
-		btnRefreshBills.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dbFactory = DocumentBuilderFactory.newInstance();
-				//accountFile = new File("src/resources/" + accountName);
-				
-				accountFile = new File(System.getenv("APPDATA") + "/TrackMyBills/" + accountName);
-				try {
-					documentBuilder = dbFactory.newDocumentBuilder();
-				} catch (ParserConfigurationException e) {
-					System.err.println("Error building new document builder.");
-				}
-				try {
-					xmlDocument = documentBuilder.parse(accountFile);
-				} catch (Exception e) {
-					System.err.println("Error parsing XML document.");
-				}
-				
-				docParser = new DocumentParser(xmlDocument);
-				getUtilityBills();
-			}
-		});
-		btnRefreshBills.setBounds(10, 172, 107, 23);
-		getContentPane().add(btnRefreshBills);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(10, 142, 473, 2);

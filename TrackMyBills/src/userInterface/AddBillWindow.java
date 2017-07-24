@@ -185,17 +185,14 @@ public class AddBillWindow extends JDialog {
 		
 		// Check if the entered bill type is valid
 		if(validBill) {
-			System.out.println("Valid bill type");
 			try {
 				out = new PrintWriter(this.accountFile);
 				buildBill = "\t<bill name=\"" + this.cboxBillMonth.getSelectedItem() + " " + this.cboxBillYear.getSelectedItem() + "\" type=\"" + this.txtBillType.getText() + "\">\n";
 				buildBill += "\t\t<total-cost>" + this.txtBillAmount.getText() + "</total-cost>\n";
 				buildBill += "\t\t<due-date>July 28 2017</due-date>\n";
 				buildBill += "\t</bill>\n</account>";
-				//System.out.println(buildBill);
 				this.readAccountFile = this.readAccountFile.replace("</account>", buildBill);
 				out.write(this.readAccountFile);
-				System.out.println(this.readAccountFile);
 				out.close();
 				this.dispose();
 			} catch (FileNotFoundException e) {

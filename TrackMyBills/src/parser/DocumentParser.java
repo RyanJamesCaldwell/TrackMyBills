@@ -8,8 +8,21 @@ package parser;
 
 import linkedList.DoublyLinkedList;
 
+import java.io.File;
+
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -28,23 +41,28 @@ public class DocumentParser {
 	private DoublyLinkedList gasBills;
 	// Linked list of water bills
 	private DoublyLinkedList waterBills;
+	// User's account file name
+	private String accountName;
 	
 	/**
 	 * 
 	 * @param userDocument The XML document to be parsed.
 	 */
-	public DocumentParser(Document userDocument) {
+	public DocumentParser(Document userDocument, String accountName) {
 		this.document = userDocument;
+		this.accountName = accountName;
 		electricBills = new DoublyLinkedList();
 		gasBills = new DoublyLinkedList();
 		waterBills = new DoublyLinkedList();
 	}
 	
 	/**
-	 * <b>Description</b>: Parses the electric bills from the XML document.
+	 * Parses the electric bills from the XML document.
+	 * 
 	 * @return A linked list of electric bills.
 	 */
 	public DoublyLinkedList getElectricBills() {
+		this.electricBills = new DoublyLinkedList();
 		getBillOfType("electric");
 		return this.electricBills;
 	}
@@ -95,10 +113,55 @@ public class DocumentParser {
 	}
 	
 	/**
+	 * Removes bill by a given name. Returns true if bill found and removed, false otherwise.
+	 * 
+	 * @param billName
+	 */
+	public boolean removeBillByName(String billName) {
+		NodeList nl = this.document.getElementsByTagName("bill");
+		Element tempElement;
+		String tempDescription;
+		boolean foundAndRemoved = false;
+		Node parent;
+		
+		for(int i = 0; i < nl.getLength(); i++) {
+			tempElement = (Element) nl.item(i);
+			tempDescription = tempElement.getAttribute("name");
+			
+			// If the description of the current element matches what the user wants to remove, remove it
+			if(tempDescription.equals(billName)){
+				parent = tempElement.getParentNode();
+				tempElement.getParentNode().removeChild(nl.item(i));
+
+				try {
+					Transformer transformer = TransformerFactory.newInstance().newTransformer();
+					Result output = new StreamResult(new File(System.getenv("APPDATA") + "/TrackMyBills/" + this.accountName));
+					Source input = new DOMSource(this.document);
+					transformer.transform(input, output);
+				} catch (TransformerConfigurationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (TransformerFactoryConfigurationError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (TransformerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				foundAndRemoved = true;
+			}
+		}
+		return foundAndRemoved;
+	}
+	
+	/**
 	 * <b>Description</b>: Parses the gas bills from the XML document.
 	 * @return A linked list of gas bills.
 	 */
 	public DoublyLinkedList getGasBills() {
+		this.gasBills = new DoublyLinkedList();
 		getBillOfType("gas");
 		return this.gasBills;
 	}
@@ -108,6 +171,7 @@ public class DocumentParser {
 	 * @return A linked list of water bills.
 	 */
 	public DoublyLinkedList getWaterBills() {
+		this.waterBills = new DoublyLinkedList();
 		getBillOfType("water");
 		return this.waterBills;
 	}

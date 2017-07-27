@@ -83,6 +83,7 @@ public class ChartBuilder {
 		ChartPanel CP;
 		JButton btnSave;
 		final int EMPTY_LIST = 0;
+		String tempName;
 		
 		if (llSize > EMPTY_LIST) {
 			currentNode = this.data.getHead().getNext();			
@@ -91,7 +92,11 @@ public class ChartBuilder {
 			
 			//Populate the dataset for the chart
 			while (currentNode != this.data.getTail()) {
-				dataset.addValue(currentBill.getTotalCost(), currentBill.getType(), currentBill.getBillName());
+				tempName = currentBill.getBillName().replace(" gas", "");
+				tempName = tempName.replace(" water", "");
+				tempName = tempName.replace(" electric", "");
+				
+				dataset.addValue(currentBill.getTotalCost(), currentBill.getType(), tempName);
 				currentNode = currentNode.getNext();
 				currentBill = (Bill) currentNode.getNodeValue();
 			}

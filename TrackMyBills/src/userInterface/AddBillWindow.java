@@ -187,9 +187,8 @@ public class AddBillWindow extends JDialog {
 		if(validBill) {
 			try {
 				out = new PrintWriter(this.accountFile);
-				buildBill = "\t<bill name=\"" + this.cboxBillMonth.getSelectedItem() + " " + this.cboxBillYear.getSelectedItem() + "\" type=\"" + this.txtBillType.getText() + "\">\n";
+				buildBill = "\t<bill name=\"" + this.cboxBillMonth.getSelectedItem() + " " + this.cboxBillYear.getSelectedItem() + " " + this.txtBillType.getText() + "\" type=\"" + this.txtBillType.getText() + "\">\n";
 				buildBill += "\t\t<total-cost>" + this.txtBillAmount.getText() + "</total-cost>\n";
-				buildBill += "\t\t<due-date>July 28 2017</due-date>\n";
 				buildBill += "\t</bill>\n</account>";
 				this.readAccountFile = this.readAccountFile.replace("</account>", buildBill);
 				out.write(this.readAccountFile);

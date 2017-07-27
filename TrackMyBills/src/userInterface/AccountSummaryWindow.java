@@ -84,7 +84,7 @@ public class AccountSummaryWindow extends JDialog {
 			System.err.println("Error parsing XML document.");
 		}
 		
-		docParser = new DocumentParser(xmlDocument);
+		docParser = new DocumentParser(xmlDocument, accountName);
 		this.getUtilityBills();
 		
 	}
@@ -118,7 +118,7 @@ public class AccountSummaryWindow extends JDialog {
 					System.err.println("Error parsing XML document.");
 				}
 				
-				docParser = new DocumentParser(xmlDocument);
+				docParser = new DocumentParser(xmlDocument, accountName);
 				getUtilityBills();
 			}
 		});
@@ -173,6 +173,16 @@ public class AccountSummaryWindow extends JDialog {
 		lblRefreshBillList.setFont(new Font("Arial", Font.BOLD, 11));
 		lblRefreshBillList.setBounds(10, 151, 100, 14);
 		getContentPane().add(lblRefreshBillList);
+		
+		JButton btnRemoveBill = new JButton("Remove Bill");
+		btnRemoveBill.setBounds(120, 36, 100, 23);
+		getContentPane().add(btnRemoveBill);
+		btnRemoveBill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemoveBillWindow newWindow = new RemoveBillWindow(docParser);
+				newWindow.getForm().setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			}
+		});
 	}
 	
 	/**

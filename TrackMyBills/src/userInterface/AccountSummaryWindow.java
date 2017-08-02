@@ -23,6 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 
+import constants.ConstantVariables;
 import linkedList.DoublyLinkedList;
 
 import parser.DocumentParser;
@@ -72,7 +73,7 @@ public class AccountSummaryWindow extends JDialog {
 		
 		//Setup for reading & writing to XML file
 		dbFactory = DocumentBuilderFactory.newInstance();
-		accountFile = new File(System.getenv("APPDATA") + "/TrackMyBills/" + accountName);
+		accountFile = new File(ConstantVariables.TRACK_MY_BILLS_FOLDER_STRING + "/" + accountName);
 		try {
 			documentBuilder = dbFactory.newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
@@ -106,7 +107,7 @@ public class AccountSummaryWindow extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				dbFactory = DocumentBuilderFactory.newInstance();
 				
-				accountFile = new File(System.getenv("APPDATA") + "/TrackMyBills/" + accountName);
+				accountFile = new File(ConstantVariables.TRACK_MY_BILLS_FOLDER_STRING + "/" + accountName);
 				try {
 					documentBuilder = dbFactory.newDocumentBuilder();
 				} catch (ParserConfigurationException e) {

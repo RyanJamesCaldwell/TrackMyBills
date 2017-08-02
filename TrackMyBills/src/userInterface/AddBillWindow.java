@@ -196,7 +196,6 @@ public class AddBillWindow extends JDialog {
 				this.dispose();
 			} catch (FileNotFoundException e) {
 				System.err.println("There was a problem writing the new bill to the user's account.");
-				//e.printStackTrace();
 			}
 		}
 		else {

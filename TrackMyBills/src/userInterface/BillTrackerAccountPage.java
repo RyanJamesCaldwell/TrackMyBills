@@ -18,6 +18,9 @@ import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import constants.ConstantVariables;
+
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JButton;
@@ -55,8 +58,6 @@ public class BillTrackerAccountPage {
 	private JDialog accountSummaryWindow;
 	// JDialog box to be opened when user is creating new account
 	private CreateAccountWindow createAccountWindow;
-	// TrackMyBills folder in AppData
-	private File trackMyBillsFolder;
 	// JButton for removing account
 	private JButton btnRemoveAccount;
 	
@@ -73,13 +74,9 @@ public class BillTrackerAccountPage {
 	
 	// Create TrackMyBills folder in APPDATA if it doesn't exist
 	private void checkForExistingAppDataFolder() {
-		this.trackMyBillsFolder = new File(System.getenv("APPDATA") + "/TrackMyBills");
-		File appData = new File(System.getenv("APPDATA"));
-		
-		if(appData.exists()) {
-			// If the TrackMyBills folder doesn't exist in APPDATA, create the folder
-			if(!this.trackMyBillsFolder.exists()) {
-				this.trackMyBillsFolder.mkdir();
+		if(ConstantVariables.APP_DATA_FILE.exists()) {
+			if(!ConstantVariables.TRACK_MY_BILLS_FOLDER.exists()) {
+				ConstantVariables.TRACK_MY_BILLS_FOLDER.mkdir();
 			}
 		}
 		else {
@@ -181,7 +178,6 @@ public class BillTrackerAccountPage {
 	 * Open CreateAccountWindow, allow user to create a new user account
 	 */
 	public void createNewAccount() {
-		System.out.println("Creating new account window...");
 		createAccountWindow = new CreateAccountWindow();
 		createAccountWindow.getForm().addWindowListener(new WindowAdapter() {
 		    @Override
@@ -204,7 +200,7 @@ public class BillTrackerAccountPage {
 		String accountToRemove = this.cboxAccountName.getSelectedItem().toString();
 		int indexToRemoveFromCbox = this.cboxAccountName.getSelectedIndex();
 		
-		File fileToRemove = new File(System.getenv("APPDATA") + "/TrackMyBills/" + accountToRemove);
+		File fileToRemove = new File(ConstantVariables.TRACK_MY_BILLS_FOLDER_STRING + accountToRemove);
 		fileToRemove.delete();
 		this.cboxAccountName.removeItemAt(indexToRemoveFromCbox);
 		if(this.cboxAccountName.getItemCount() == 0){
@@ -218,8 +214,7 @@ public class BillTrackerAccountPage {
 		listOfAccounts = new DoublyLinkedList();
 		
 		// Existing user accounts are located in the "resources" folder
-		File resourceFolder = new File(System.getenv("APPDATA") + "/TrackMyBills");
-		File[] listOfFiles = resourceFolder.listFiles();
+		File[] listOfFiles = ConstantVariables.TRACK_MY_BILLS_FOLDER.listFiles();
 		
 		if(listOfFiles.length == 0) {
 			this.btnlogin.setEnabled(false);

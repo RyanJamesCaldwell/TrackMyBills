@@ -18,6 +18,9 @@ import java.io.PrintWriter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import constants.ConstantVariables;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -97,15 +100,14 @@ public class CreateAccountWindow extends JDialog {
 					JOptionPane.showMessageDialog(null, "Please fill in both fields.");
 				}
 				else {
-					newUserAccountFile = new File(System.getenv("APPDATA") + "/TrackMyBills/" + firstName + lastName + ".xml");
+					newUserAccountFile = new File(ConstantVariables.TRACK_MY_BILLS_FOLDER_STRING + "/" + firstName + lastName + ".xml");
 					
 					try {
 						newUserAccountFile.createNewFile();
-						JOptionPane.showMessageDialog(null, firstName + lastName +".xml user account has been created.");
+						JOptionPane.showMessageDialog(null, firstName + lastName + ".xml user account has been created.");
 						finishAccountSetup();
 					} catch (IOException e) {
 						System.err.println("New user account could not be created.");
-						//e.printStackTrace();
 					}
 				}
 			}
@@ -128,7 +130,6 @@ public class CreateAccountWindow extends JDialog {
 			outWriter.close();
 		} catch (FileNotFoundException e) {
 			System.err.println("User's account file was not found.");
-			//e.printStackTrace();
 		}
 	}
 }

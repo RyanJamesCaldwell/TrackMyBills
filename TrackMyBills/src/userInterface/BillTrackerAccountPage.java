@@ -200,7 +200,8 @@ public class BillTrackerAccountPage {
 		String accountToRemove = this.cboxAccountName.getSelectedItem().toString();
 		int indexToRemoveFromCbox = this.cboxAccountName.getSelectedIndex();
 		
-		File fileToRemove = new File(ConstantVariables.TRACK_MY_BILLS_FOLDER_STRING + accountToRemove);
+		File fileToRemove = new File(ConstantVariables.TRACK_MY_BILLS_FOLDER_STRING + "/" + accountToRemove);
+		
 		fileToRemove.delete();
 		this.cboxAccountName.removeItemAt(indexToRemoveFromCbox);
 		if(this.cboxAccountName.getItemCount() == 0){
